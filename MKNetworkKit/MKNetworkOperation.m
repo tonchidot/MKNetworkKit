@@ -685,14 +685,12 @@
                                          @"--%@\r\nContent-Disposition: form-data; name=\"%@\"\r\n\r\n%@\r\n",
                                          boundary, key, o];
             [body appendData:[thisFieldString dataUsingEncoding:[self stringEncoding]]];
-            [body appendData:[@"\r\n" dataUsingEncoding:[self stringEncoding]]];
         }
     } else {
         NSString *thisFieldString = [NSString stringWithFormat:
                                  @"--%@\r\nContent-Disposition: form-data; name=\"%@\"\r\n\r\n%@\r\n",
                                  boundary, key, obj];
         [body appendData:[thisFieldString dataUsingEncoding:[self stringEncoding]]];
-        [body appendData:[@"\r\n" dataUsingEncoding:[self stringEncoding]]];
     }
   }];        
   

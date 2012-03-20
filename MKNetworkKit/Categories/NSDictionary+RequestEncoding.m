@@ -35,6 +35,14 @@
         NSObject *value = [self valueForKey:key];
         if([value isKindOfClass:[NSString class]])
             [string appendFormat:@"%@=%@&", [key urlEncodedString], [((NSString*)value) urlEncodedString]];
+        else if ([value isKindOfClass:[NSArray class]]){
+            for(id v in ((NSArray *)value)){
+                if( [v isKindOfClass:[NSString class]] )
+                     [string appendFormat:@"%@=%@&", [key urlEncodedString], [((NSString*)v) urlEncodedString]];
+                else
+                     [string appendFormat:@"%@=%@&", [key urlEncodedString], value];
+            }
+        }
         else
             [string appendFormat:@"%@=%@&", [key urlEncodedString], value];
     }
