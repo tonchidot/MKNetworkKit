@@ -598,6 +598,10 @@
   }];
 }
 
+-(void) useCookie:(BOOL)useCookie {
+  [self.request setHTTPShouldHandleCookies:useCookie];
+}
+
 /*
  Printing a MKNetworkOperation object is printed in curl syntax
  */
