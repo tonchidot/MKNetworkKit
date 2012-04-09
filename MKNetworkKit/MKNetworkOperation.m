@@ -664,6 +664,11 @@ OSStatus extractIdentityAndTrust(CFDataRef inPKCS12Data,
   [self.request setValue:[NSString stringWithFormat:@"%@ %@", authType, token]
       forHTTPHeaderField:@"Authorization"];
 }
+
+-(void) useCookie:(BOOL)useCookie {
+  [self.request setHTTPShouldHandleCookies:useCookie];
+}
+
 /*
  Printing a MKNetworkOperation object is printed in curl syntax
  */

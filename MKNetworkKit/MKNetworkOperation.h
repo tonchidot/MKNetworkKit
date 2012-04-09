@@ -409,6 +409,15 @@ typedef enum {
 -(void) setAuthorizationHeaderValue:(NSString*) token forAuthType:(NSString*) authType;
 
 /*!
+ *  @abstract Set whether to use cookie
+ *  
+ *  @discussion
+ *  Default set to YES.
+ *	If you want to disable using cookie, use this method.
+ */
+-(void) useCookie:(BOOL)useCookie;
+
+/*!
  *  @abstract Attaches a file to the request
  *  
  *  @discussion
