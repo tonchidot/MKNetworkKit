@@ -411,35 +411,45 @@ static NSOperationQueue *_sharedNetworkQueue;
 
 - (MKNetworkOperation*)imageAtURL:(NSURL *)url onCompletion:(MKNKImageBlock) imageFetchedBlock
 {
-#ifdef DEBUG
-  // I could enable caching here, but that hits performance and inturn affects table view scrolling
-  // if imageAtURL is called for loading thumbnails.
-  if(![self isCacheEnabled]) DLog(@"imageAtURL:onCompletion: requires caching to be enabled.")
-#endif
-    
-    if (url == nil) {
-      return nil;
-    }
+    MKNetworkOperation *op = [self imageAtURL:url onCompletion:imageFetchedBlock onError:nil];
   
-  MKNetworkOperation *op = [self operationWithURLString:[url absoluteString]];
-  
-  [op 
-   onCompletion:^(MKNetworkOperation *completedOperation)
-   {
-     imageFetchedBlock([completedOperation responseImage], 
-                       url,
-                       [completedOperation isCachedResponse]);
-     
-   }
-   onError:^(NSError* error) {
-     
-     DLog(@"%@", error);
-   }];    
-  
-  [self enqueueOperation:op];
-  
-  return op;
+    return op;
 }
+
+- (MKNetworkOperation*)imageAtURL:(NSURL *)url onCompletion:(MKNKImageBlock) imageFetchedBlock onError:(MKNKErrorBlock)errorBlock
+{
+#ifdef DEBUG
+    // I could enable caching here, but that hits performance and inturn affects table view scrolling
+    // if imageAtURL is called for loading thumbnails.
+    if(![self isCacheEnabled]) DLog(@"imageAtURL:onCompletion: requires caching to be enabled.")
+#endif
+        
+    if (url == nil) {
+        return nil;
+    }
+
+    MKNetworkOperation *op = [self operationWithURLString:[url absoluteString]];
+    
+    [op 
+     onCompletion:^(MKNetworkOperation *completedOperation)
+     {
+         if ( !imageFetchedBlock ) return;
+         imageFetchedBlock([completedOperation responseImage], 
+                           url,
+                           [completedOperation isCachedResponse]);
+         
+     }
+     onError:^(NSError* error) {
+         DLog(@"%@", error);
+         if ( !errorBlock ) return;
+         errorBlock(error);
+     }];    
+    
+    [self enqueueOperation:op];
+    
+    return op;
+}
+
 
 #pragma mark -
 #pragma mark Cache related

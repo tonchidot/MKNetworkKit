@@ -174,6 +174,8 @@
  *  The image is returned to the caller via MKNKImageBlock callback block. 
  */
 - (MKNetworkOperation*)imageAtURL:(NSURL *)url onCompletion:(MKNKImageBlock) imageFetchedBlock;
+- (MKNetworkOperation*)imageAtURL:(NSURL *)url onCompletion:(MKNKImageBlock) imageFetchedBlock onError:(MKNKErrorBlock)errorBlock;
+
 /*!
  *  @abstract Enqueues your operation into the shared queue
  *  
