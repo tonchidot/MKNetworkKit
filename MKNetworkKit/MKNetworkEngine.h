@@ -385,6 +385,17 @@
 -(int) cacheMemoryCost;
 
 /*!
+ *  @abstract Cache Directory In Storage Cost
+ *
+ *  @discussion
+ *	This method can be over-ridden by subclasses to provide an alternative in storage cache size.
+ *  By default, MKNetworkKit caches 1000 recent requests in storage
+ *  The default size is 1000
+ *  Overriding this method is optional
+ */
+-(int) cacheStorageCost;
+
+/*!
  *  @abstract Enable Caching
  *  
  *  @discussion
