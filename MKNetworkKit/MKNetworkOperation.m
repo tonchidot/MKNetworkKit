@@ -896,7 +896,7 @@ OSStatus extractIdentityAndTrust(CFDataRef inPKCS12Data,
 }
 
 #pragma mark -
-#pragma Main method
+#pragma mark Main method
 -(void) main {
   
   @autoreleasepool {
@@ -962,7 +962,7 @@ OSStatus extractIdentityAndTrust(CFDataRef inPKCS12Data,
   }
 }
 
-#pragma -
+#pragma mark -
 #pragma mark NSOperation stuff
 
 - (BOOL)isConcurrent

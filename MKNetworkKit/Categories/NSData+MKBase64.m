@@ -101,7 +101,7 @@ void *mk_NewBase64Decode(
 		size_t accumulateIndex = 0;
 		while (i < length)
 		{
-			unsigned char decode = mk_base64DecodeLookup[inputBuffer[i++]];
+			unsigned char decode = mk_base64DecodeLookup[(int)inputBuffer[i++]];
 			if (decode != xx)
 			{
 				accumulated[accumulateIndex] = decode;
